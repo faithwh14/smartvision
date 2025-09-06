@@ -1,0 +1,4 @@
+import "proto3"
+
+rpc { ... }
+returns { ... }
