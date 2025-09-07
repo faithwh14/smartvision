@@ -1,0 +1,20 @@
+{
+    "files.associations": {
+        "array": "cpp",
+        "chrono": "cpp",
+        "compare": "cpp",
+        "functional": "cpp",
+        "ratio": "cpp",
+        "tuple": "cpp",
+        "type_traits": "cpp",
+        "utility": "cpp",
+        "__functional_base": "cpp",
+        "__functional_base_03": "cpp",
+        "__tuple": "cpp",
+        "algorithm": "cpp",
+        "atomic": "cpp",
+        "limits": "cpp",
+        "memory": "cpp",
+        "random": "cpp"
+    }
+}
