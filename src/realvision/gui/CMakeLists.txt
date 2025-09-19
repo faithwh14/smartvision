@@ -7,8 +7,8 @@ set(GUI_MODEL_SRC
 )
 
 set(GUI_VIEWMODEL_SRC
-    viewmodel/StreamImagerProvider.h
-    viewmodel/StreamImagerProvider.cpp
+    # viewmodel/StreamImagerProvider.h
+    # viewmodel/StreamImagerProvider.cpp
 )
 
 set(GUI_VIEW_SRC
