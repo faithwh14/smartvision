@@ -5,6 +5,8 @@ set(COMMON_SRC
     Logger.cpp
     EventFdMutex.h
     EventFdMutex.cpp
+    WorkerThread.h
+    WorkerThread.cpp
 )
 
 add_library(${MODULE} STATIC
