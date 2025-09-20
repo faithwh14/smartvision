@@ -1,6 +1,6 @@
 set(APP_TEST_COMMON test-log)
 
-add_executable(${APP_TEST_COMMON} test-log-main.cpp)
+add_executable(${APP_TEST_COMMON} main-log.cpp)
 
 target_include_directories(${APP_TEST_COMMON}
     PRIVATE
