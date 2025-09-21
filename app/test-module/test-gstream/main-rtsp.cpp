@@ -13,6 +13,9 @@ int main(int argc, char* argv[]) {
   LOG_INFO("TEST INFO");
 
   RtspClient client("rtsp://user:pass@ip:port/stream");
+  client.SetFrameCallback([](cv::Mat frame) {
+    std::cout << "Do nothing about this frame: " << frame.rows << " x " << frame.cols << std::endl;
+  });
   client.BuildPipeline();
   client.Run();
 

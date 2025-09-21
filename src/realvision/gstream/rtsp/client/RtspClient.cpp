@@ -31,7 +31,7 @@ void RtspClient::BuildPipeline() {
 
   g_object_set(sink, "emit-signals", TRUE, "sync", FALSE, nullptr);
 
-  g_signal_connect(sink, "new-sample", G_CALLBACK(RtspClient::on_new_sample), nullptr);
+  g_signal_connect(sink, "new-sample", G_CALLBACK(RtspClient::on_new_sample), this);
 
   gst_bin_add_many(GST_BIN(m_pipeline), src, depay, parse, decode, convert, sink, nullptr);
 
@@ -68,9 +68,20 @@ void RtspClient::Run() {
   gst_element_set_state(m_pipeline, GST_STATE_NULL);
 }
 
-GstFlowReturn RtspClient::on_new_sample(GstAppSink* sink, gpointer /*user_data*/) {
+void RtspClient::SetFrameCallback(FrameCB frame_cb) {
+  m_frame_cb = frame_cb;
+}
+
+GstFlowReturn RtspClient::on_new_sample(GstAppSink* sink, gpointer user_data) {
+  auto* self = static_cast<RtspClient*>(user_data);
+
   GstSample* sample = gst_app_sink_pull_sample(sink);
   if (!sample) {
+    return GST_FLOW_ERROR;
+  }
+
+  if (!self) {
+    gst_sample_unref(sample);
     return GST_FLOW_ERROR;
   }
 
@@ -85,8 +96,12 @@ GstFlowReturn RtspClient::on_new_sample(GstAppSink* sink, gpointer /*user_data*/
   GstMapInfo map;
   if (gst_buffer_map(buffer, &map, GST_MAP_READ)) {
     cv::Mat frame(height, width, CV_8UC3, (char*)map.data);
-    cv::imshow("RTSP Frame", frame);
-    cv::waitKey(1);
+    // cv::imshow("RTSP Frame", frame);
+    // cv::waitKey(1);
+
+    if (self->m_frame_cb) {
+      self->m_frame_cb(frame.clone());
+    }
     gst_buffer_unmap(buffer, &map);
   }
 
