@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.20)
 
 project(smartvision LANGUAGES C CXX)
 
@@ -35,12 +35,12 @@ option(BUILD_COMM "Build common" ON)
 option(BUILD_APP "Build app" ON)
 option(BUILD_TEST "Build test" ON)
 
-if (BUILD_VISION)
-    add_subdirectory(${CMAKE_SOURCE_DIR}/src/realvision)
-endif()
-
 if (BUILD_COMM)
     add_subdirectory(${CMAKE_SOURCE_DIR}/src/common)
+endif()
+
+if (BUILD_VISION)
+    add_subdirectory(${CMAKE_SOURCE_DIR}/src/realvision)
 endif()
 
 if (BUILD_APP)
