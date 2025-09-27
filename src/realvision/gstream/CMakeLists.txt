@@ -8,6 +8,8 @@ set(GSTREAM_SRC
 set(GSTREAM_RTSP_CLIENT_SRC
     rtsp/client/RtspClient.h
     rtsp/client/RtspClient.cpp
+    rtsp/client/BatchManager.h
+    rtsp/client/BatchManager.cpp
 )
 
 set(GSTREAM_RTSP_SERVER_SRC
@@ -36,6 +38,7 @@ target_include_directories(${GSTREAM_MODULE}
 
 target_link_libraries(${GSTREAM_MODULE}
     PRIVATE
+        sv_common
         ${GST_LIBRARIES}
         ${GST_BASE_LIBRARIES}
         ${GST_VIDEO_LIBRARIES}
